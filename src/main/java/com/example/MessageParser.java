@@ -1,4 +1,5 @@
 package com.example;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -8,13 +9,11 @@ import java.util.Map;
 public class MessageParser {
     private String url;
 
-    public MessageParser(String url)
-    {
+    public MessageParser(String url) {
         this.url = url;
     }
 
-    public Map<String, String> ParseMe(String url)
-    {
+    public Map<String, String> ParseMe(String url) {
         try {
             URL u = new URL(url);
             Map<String, String> map = splitQuery(u);
@@ -28,8 +27,7 @@ public class MessageParser {
     }
 
     // Black magic ftw
-    public static Map<String, String> splitQuery(URL url) throws UnsupportedEncodingException
-    {
+    public static Map<String, String> splitQuery(URL url) throws UnsupportedEncodingException {
         Map<String, String> query_pairs = new LinkedHashMap<String, String>();
         String query = url.getQuery();
         String[] pairs = query.split("&");

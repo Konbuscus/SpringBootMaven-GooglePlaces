@@ -1,22 +1,15 @@
 package com.example;
 
-import org.json.JSONObject;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import se.walkercrou.places.*;
-import se.walkercrou.places.exception.GooglePlacesException;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 @RestController
 public class RestoController {
-
     final static  String APIKEY = "AIzaSyAU3vOYPGy7eiTHA4aA53j43pbfqY_IxKQ";
 
     @RequestMapping(value= "/restaurant", method = RequestMethod.GET)
@@ -48,22 +41,12 @@ public class RestoController {
 
                 break;
             }
-
-            }
-
-
-
-
+        }
         return html;
-
-
 }
 
     @RequestMapping(value = "/error", method = RequestMethod.TRACE)
     public String error() {
         return "error";
     }
-
-
-
 }
