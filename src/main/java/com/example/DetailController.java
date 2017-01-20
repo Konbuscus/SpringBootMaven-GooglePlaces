@@ -7,7 +7,6 @@ import org.json.JSONTokener;
 import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -20,14 +19,10 @@ public class DetailController {
         initWeekDays();
         StringBuilder result = new StringBuilder();
         try {
-            //String requestUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?placeId=" + id + "&radius=500&types=food&name=cruise&key=" + RestoController.APIKEY;
             String requestUrl = "https://maps.googleapis.com/maps/api/place/details/json?placeid=" + id + "&key=" + RestoController.APIKEY;
             URL request = new URL(requestUrl);
-            URLConnection connection = request.openConnection();
-
             JSONTokener tokener = new JSONTokener(request.openStream());
             JSONObject json = new JSONObject(tokener);
-            //result.append("<h2>REQUEST:" + requestUrl + "</h2><strong>DEBUG JSON: " + json.toString() + "</strong>");
 
             try {
                 if (json.length() > 0) {

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import se.walkercrou.places.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import se.walkercrou.places.exception.NoResultsFoundException;
 import java.util.List;
 import java.util.Map;
 
@@ -24,22 +25,13 @@ public class RestoController {
             GooglePlaces client = new GooglePlaces(APIKEY);
             List<Place> places = client.getNearbyPlaces(latitude, longitude, GooglePlacesInterface.MAXIMUM_RESULTS, Param.name("types").value(Types.TYPE_RESTAURANT), Param.name("radius").value(1000));
 
-            for (int i = 0; i < places.size(); i++) {
-                //System.out.println(i + " : " + places.get(i).getName());
-                Place getDetails = places.get(i).getDetails();
-                html += getDetails.getName() + "<br>";
-                html += "<a href=restaurant/"+getDetails.getPlaceId()+ " </a>Détails ?<br>";
-               /* html += getDetails.getAccuracy() + "<br>";
-                html += getDetails.getAddress() + "<br>";
-                html += getDetails.getClient() + "<br>";
-                html += getDetails.getGoogleUrl() + "<br>";
-                html += getDetails.getHours() + "<br>";
-                html += getDetails.getInternationalPhoneNumber() + "<br>";
-                html += getDetails.getPhoneNumber() + "<br>";
-                html += getDetails.getWebsite() + "<br>";
-                html += getDetails.getStatus() + "<br>";*/
-
-                break;
+            try {
+                for (Place place : places) {
+                    html += "<p>Nom du restaurant : <strong>" + place.getName() + "</strong></p>";
+                    html += "<em>Details <a target='blank_' href='restaurant/" + place.getPlaceId() + "'>ici</a></em>";
+                }
+            } catch (NoResultsFoundException ex) {
+                html += ex.getMessage();
             }
         }
         return html;
