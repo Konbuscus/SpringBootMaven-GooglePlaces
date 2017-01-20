@@ -35,7 +35,7 @@ public class RestoController {
                 //System.out.println(i + " : " + places.get(i).getName());
                 Place getDetails = places.get(i).getDetails();
                 html += getDetails.getName() + "<br>";
-                html += "<a href=restaurant/id="+getDetails.getPlaceId()+ " </a>Détails ?<br>";
+                html += "<a href=restaurant/"+getDetails.getPlaceId()+ " </a>Détails ?<br>";
                /* html += getDetails.getAccuracy() + "<br>";
                 html += getDetails.getAddress() + "<br>";
                 html += getDetails.getClient() + "<br>";
